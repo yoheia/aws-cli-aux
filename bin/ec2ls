@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+aws ec2 describe-instances --output=table --query 'Reservations[].Instances[].{InstanceId: InstanceId, PrivateIp: join(`, `, NetworkInterfaces[].PrivateIpAddress), GlobalIP: join(`, `, NetworkInterfaces[].Association.PublicIp), State: State.Name,Name: Tags[?Key==`Name`].Value|[0]}'
